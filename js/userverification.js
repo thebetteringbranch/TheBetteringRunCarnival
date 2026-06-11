@@ -1,10 +1,11 @@
+// WITH THIS
 async function fetchVerifiedNumbers() {
     const response = await fetch(
-        "https://shy-unit-e261.gran5g2017.workers.dev/"
+        "https://script.google.com/macros/s/AKfycbzWEJ5KZYH_jwkESGNKis5hc46WckeuYPtCcCa1BvryfQjunJrSc-MMUBkGwsIn_OCt/exec" + 
+        document.getElementById("username").value.trim()
     );
     const data = await response.json();
-    console.log(data.values.flat());
-    return data.values.flat(); // Converts to a simple array of phone numbers
+    return data.valid ? [document.getElementById("username").value.trim()] : [];
 }
 
 function validatePhoneNumber() {
