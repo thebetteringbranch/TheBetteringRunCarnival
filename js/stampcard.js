@@ -108,7 +108,7 @@ const goodieBag = urlParams.get("goodieBag");
 
 if (goodieBag == "false") {
     alert(
-        "Unfortunately, Goodie Bag Redemption is only available for Verified Users"
+        "Unfortunately, Goodie Bag Redemption is only available for Registered Runners"
     );
 }
 
