@@ -1,22 +1,37 @@
 async function fetchVerifiedNumbers() {
-    const id = document.getElementById("username").value.trim();
     const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbzrYcNX0MWcg0CB6LZQ7WYEtdT_juJN5_Ve-3uQkNiNC2zg7uOgexRO29gUMrQnv565/exec?id=" + id,
-        { redirect: "follow" }
+        "https://shy-unit-e261.gran5g2017.workers.dev/"
     );
     const data = await response.json();
-    return data.valid ? [id] : [];
+    console.log(data.values.flat());
+    return data.values.flat(); // Converts to a simple array of phone numbers
+}
+
+function validatePhoneNumber() {
+    const input = document.getElementById("username");
+    const phoneNumber = input.value;
+
+    // Check if the phone number is within the valid ranges
+    if (phoneNumber >= 10000 && phoneNumber <= 10300) {
+        input.setCustomValidity(""); // Valid number
+    } else {
+        input.setCustomValidity("Please enter a Valid Registration ID.");
+    }
 }
 
 // Function for handling normal login
 async function handleLogin() {
     console.log("User clicked Login");
+
     const inputNumber = document.getElementById("username").value.trim();
     const allowedNumbers = await fetchVerifiedNumbers();
+
     if (allowedNumbers.includes(inputNumber)) {
         sessionStorage.setItem("userLoggedIn", "true");
         sessionStorage.setItem("guestUser", "false");
         console.log("userLoggedIn set to true");
+
+        // Redirect after setting session
         window.location.href = "stampcard.html";
     } else {
         alert("Invalid Registration ID.");
@@ -26,29 +41,33 @@ async function handleLogin() {
 // Function for handling guest login
 function handleGuestLogin() {
     console.log("User logged in as Guest");
+
     sessionStorage.setItem("guestUser", "true");
     sessionStorage.setItem("userLoggedIn", "true");
     console.log("guestUser set to true");
+
+    // Redirect to guest-access page
     window.location.href = "stampcard.html";
+}
+
+if (sessionStorage.getItem("pointsRedeemed") === "true") {
+    console.log("Redirecting to redeemed.html...");
+    window.location.href = "redeemed.html"; // Ensure this page exists
+}
+
+const urlParams = new URLSearchParams(window.location.search);
+
+const redirect = urlParams.get("redirect");
+
+if (!urlParams || !redirect || redirect != "false") {
+    if (sessionStorage.getItem("userLoggedIn") == "true") {
+        console.log("Redirecting to stampcard.html...");
+        window.location.href = "stampcard.html"; // Ensure this page exists
+    }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     console.log("DOM Loaded");
-
-    // Redirect checks
-    if (sessionStorage.getItem("pointsRedeemed") === "true") {
-        console.log("Redirecting to redeemed.html...");
-        window.location.href = "redeemed.html";
-        return;
-    }
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const redirect = urlParams.get("redirect");
-    if (redirect !== "false" && sessionStorage.getItem("userLoggedIn") === "true") {
-        console.log("Redirecting to stampcard.html...");
-        window.location.href = "stampcard.html";
-        return;
-    }
 
     // Handle loading animation
     setTimeout(() => {
