@@ -1,9 +1,29 @@
+const TOTAL_CODES = 2;
+
+let codes = [
+    "c6d9bdfc493eb3948e5ac2e51c3c65f6db3c26a0d702d42e255b6a79fe4ed07d",
+    "6e7552e8fe51972c90ef7c6f2d423249836937a1be4980f7359f8d5c8d735a7a",
+];
+
+let station_names = [
+    "What does it cost the Earth?",
+    "How good is it for me?",
+];
+
+function getScannedCodes() {
+    const saved = localStorage.getItem("scannedQRCodes");
+    return saved ? JSON.parse(saved) : [];
+}
+
+function saveScannedCodes(codes) {
+    localStorage.setItem("scannedQRCodes", JSON.stringify(codes));
+}
+
 function updateProgressDisplay(codes) {
     const progressDiv = document.getElementById("progress");
     const codesListDiv = document.getElementById("codesList");
     const prizeDiv = document.getElementById("prize");
 
-    // If already redeemed, show congrats state
     if (sessionStorage.getItem("pointsRedeemed") === "true") {
         progressDiv.textContent = "🎉 You've completed The Bettering Run!";
         codesListDiv.innerHTML = `
@@ -17,8 +37,6 @@ function updateProgressDisplay(codes) {
             </p>
         `;
         prizeDiv.innerHTML = "";
-
-        // Grey out both booths
         document.querySelectorAll(".booths .station").forEach(s => {
             s.classList.add("complete");
         });
@@ -52,73 +70,7 @@ function updateProgressDisplay(codes) {
         prizeDiv.appendChild(claimButton);
     } else {
         prizeDiv.innerHTML =
-            "<p>Complete both stations to win a LUCKY DRAW TICKET (an extra one if you're a runner!) — be sure to verify this at the redemption/info counter!</p>";
-    }
-}
-
-// How many QR codes they need to scan to claim the prize
-const TOTAL_CODES = 2;
-
-let codes = [
-    "c6d9bdfc493eb3948e5ac2e51c3c65f6db3c26a0d702d42e255b6a79fe4ed07d", // Hash of 'one'
-    "6e7552e8fe51972c90ef7c6f2d423249836937a1be4980f7359f8d5c8d735a7a", // Hash of 'two'
-  
-];
-
-let station_names = [
-    "What does it cost the Earth?",
-    "How good is it for me>",
-   
-];
-
-// Function to get progress from localStorage
-function getScannedCodes() {
-    const saved = localStorage.getItem("scannedQRCodes");
-    return saved ? JSON.parse(saved) : [];
-}
-
-// Function to save progress to localStorage
-function saveScannedCodes(codes) {
-    localStorage.setItem("scannedQRCodes", JSON.stringify(codes));
-}
-
-// Function to update the progress display on the page
-function updateProgressDisplay(codes) {
-    const progressDiv = document.getElementById("progress");
-    const codesListDiv = document.getElementById("codesList");
-    const prizeDiv = document.getElementById("prize");
-    if (codes.length === 0) {
-        progressDiv.textContent = `You have yet to complete any stations.`;
-    } else if (codes.length === 1) {
-        progressDiv.textContent = `You have completed ${codes.length} station out of ${TOTAL_CODES} stations:`;
-    } else {
-        progressDiv.textContent = `You have completed ${codes.length} stations out of ${TOTAL_CODES} stations:`;
-    }
-
-    // Show scanned codes
-    codesListDiv.innerHTML = "";
-    codes.forEach((code, index) => {
-        const p = document.createElement("p");
-        p.innerHTML = `<b>${station_names[code - 1]}</b>`;
-        codesListDiv.appendChild(p);
-        const station = document.getElementById(code);
-        station.classList.add("complete");
-    });
-
-    // Show claim prize button if they scanned all codes
-    if (codes.length >= TOTAL_CODES) {
-        prizeDiv.innerHTML = "";
-        const claimButton = document.createElement("button");
-        claimButton.textContent = "Claim Your Prize 🎉";
-        claimButton.onclick = () => {
-            window.location.replace("completion.html");
-        };
-        prizeDiv.appendChild(claimButton);
-    } else {
-        prizeDiv.innerHTML =
-            "<p>Complete both stations to win a LUCKY DRAW TICKET (an extra one if you're a runner!) — be sure to verify this at the redemption/info counter!</p>";
-    }
-}
+            "<p>Complete both stations to win a LUCKY DRAW TICKET (an extra one if you're a runner!) — be sure to verify this at the
 
 // Main logic to check for query params and update progress
 function main() {
