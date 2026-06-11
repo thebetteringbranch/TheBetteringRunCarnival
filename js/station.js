@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
       
     ];
 
-    if (["1", "2", "3", "4", "5"].includes(station)) {
+    if (["1", "2"].includes(station)) {
         pageTitle.innerHTML = titles[Number(station) - 1];
         const desc = document.getElementById(`pageDescription${station}`);
         desc.classList.remove("hidden");
