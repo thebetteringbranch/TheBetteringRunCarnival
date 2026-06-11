@@ -99,7 +99,7 @@ a {
     overflow: visible; /* Prevents overflow issues */
     display: flex;
     justify-content: center;
-    background-color: #daf1df;
+    background-color: #fdfae5;
     z-index: -2;
     align-items: center;
     justify-content: center;
