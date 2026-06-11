@@ -70,21 +70,14 @@ function updateProgressDisplay(codes) {
         prizeDiv.appendChild(claimButton);
     } else {
         prizeDiv.innerHTML =
-            "<p>Complete both stations to win a LUCKY DRAW TICKET (an extra one if you're a runner!) — be sure to verify this at the
+            "<p>Complete both stations to win a LUCKY DRAW TICKET (an extra one if you're a runner!) — be sure to verify this at the redemption/info counter!</p>";
+    }
+}
 
-// Main logic to check for query params and update progress
 function main() {
-    // Check if points have already been redeemed
-
-    console.log("Hello");
     const scannedCodes = getScannedCodes();
-
-    // Get the 'qrcode' parameter from the URL
     const urlParams = new URLSearchParams(window.location.search);
-
     const qrCode = urlParams.get("qrcode");
-
-    console.log(scannedCodes);
 
     if (
         codes.includes(qrCode) &&
@@ -99,41 +92,26 @@ function main() {
 
     for (const e of document.getElementsByClassName("complete")) {
         if ("disabled" in e) {
-            e.disabled = true; // Disable if the element supports the 'disabled' attribute
+            e.disabled = true;
             e.ariaDisabled = true;
         } else {
-            e.style.pointerEvents = "none"; // Prevent interactions for non-form elements
+            e.style.pointerEvents = "none";
         }
     }
 }
 
 const urlParams = new URLSearchParams(window.location.search);
 
-const goodieBag = urlParams.get("goodieBag");
-
-if (goodieBag == "false") {
-    alert(
-        "Unfortunately, Goodie Bag Redemption is only available for Registered Runners"
-    );
+if (urlParams.get("goodieBag") == "false") {
+    alert("Unfortunately, Goodie Bag Redemption is only available for Registered Runners");
 }
-
-const foodVoucher = urlParams.get("foodVoucher");
-
-if (foodVoucher == "false") {
-    alert(
-        "Unfortunately, This Voucher is only available for Registered Runners"
-    );
+if (urlParams.get("foodVoucher") == "false") {
+    alert("Unfortunately, This Voucher is only available for Registered Runners");
 }
-
-const photoBooth = urlParams.get("photoBooth");
-
-if (photoBooth == "false") {
-    alert(
-        "Unfortunately, This Voucher is only available for Registered Runners"
-    );
+if (urlParams.get("photoBooth") == "false") {
+    alert("Unfortunately, This Voucher is only available for Registered Runners");
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Run the main function when the page loads
     main();
 });
