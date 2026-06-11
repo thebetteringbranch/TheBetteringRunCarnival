@@ -63,7 +63,7 @@ function updateProgressDisplay(codes) {
         prizeDiv.appendChild(claimButton);
     } else {
         prizeDiv.innerHTML =
-            "<p>Complete both stations to win a LUCKY DRAW TICKET (an extra one if you're a runner!) — be sure to verify this at the redempetion/info counter!</p>";
+            "<p>Complete both stations to win a LUCKY DRAW TICKET (an extra one if you're a runner!) — be sure to verify this at the redemption/info counter!</p>";
     }
 }
 
