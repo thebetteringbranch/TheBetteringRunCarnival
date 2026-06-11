@@ -58,7 +58,7 @@ function updateProgressDisplay(codes) {
         const claimButton = document.createElement("button");
         claimButton.textContent = "Claim Your Prize 🎉";
         claimButton.onclick = () => {
-            window.location.replace("point_redemption_confirmation.html");
+            window.location.replace("completion.html");
         };
         prizeDiv.appendChild(claimButton);
     } else {
