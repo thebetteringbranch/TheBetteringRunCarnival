@@ -1,7 +1,8 @@
 if (sessionStorage.getItem("pointsRedeemed") === "true") {
-    // Redirect to another page if redemption is already completed
-    window.location.href = "redeemed.html"; // Change to the appropriate page
+    window.location.href = "stampcard.html";
 }
+
+sessionStorage.getItem("pointsRedeemed")
 
 console.log("Confirmation page script loaded");
 
