@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
         button.disabled = true;
         button.classList.add("disabled");
         document.getElementById("bottomDisclaimer").textContent =
-            "Thank you for coming to The Bettering Run 2025!";
+            "Thank you for coming to The Bettering Run 2026!";
         document.getElementById("bottomDisclaimer").style.height = "auto";
     }
 
