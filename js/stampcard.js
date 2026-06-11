@@ -1,6 +1,59 @@
-if (sessionStorage.getItem("pointsRedeemed") === "true") {
-    // Redirect to another page if redemption is already completed
-    window.location.href = "redeemed.html"; // Change to the appropriate page
+function updateProgressDisplay(codes) {
+    const progressDiv = document.getElementById("progress");
+    const codesListDiv = document.getElementById("codesList");
+    const prizeDiv = document.getElementById("prize");
+
+    // If already redeemed, show congrats state
+    if (sessionStorage.getItem("pointsRedeemed") === "true") {
+        progressDiv.textContent = "🎉 You've completed The Bettering Run!";
+        codesListDiv.innerHTML = `
+            <p style="font-size: 1.5rem;">🏆</p>
+            <p style="font-weight: 700; color: var(--dark-green);">Congratulations!</p>
+            <p>You've completed both stations and redeemed your lucky draw ticket.</p>
+            <p style="font-size: 0.85rem; color: #555;">
+                ✅ Sustainability Game — Completed<br/>
+                ✅ Health Game — Completed<br/>
+                🎟️ Lucky Draw Ticket — Redeemed
+            </p>
+        `;
+        prizeDiv.innerHTML = "";
+
+        // Grey out both booths
+        document.querySelectorAll(".booths .station").forEach(s => {
+            s.classList.add("complete");
+        });
+        return;
+    }
+
+    if (codes.length === 0) {
+        progressDiv.textContent = `You have yet to complete any stations.`;
+    } else if (codes.length === 1) {
+        progressDiv.textContent = `You have completed ${codes.length} station out of ${TOTAL_CODES} stations:`;
+    } else {
+        progressDiv.textContent = `You have completed ${codes.length} stations out of ${TOTAL_CODES} stations:`;
+    }
+
+    codesListDiv.innerHTML = "";
+    codes.forEach((code) => {
+        const p = document.createElement("p");
+        p.innerHTML = `<b>${station_names[code - 1]}</b>`;
+        codesListDiv.appendChild(p);
+        const station = document.getElementById(code);
+        station.classList.add("complete");
+    });
+
+    if (codes.length >= TOTAL_CODES) {
+        prizeDiv.innerHTML = "";
+        const claimButton = document.createElement("button");
+        claimButton.textContent = "Claim Your Prize 🎉";
+        claimButton.onclick = () => {
+            window.location.replace("point_redemption_confirmation.html");
+        };
+        prizeDiv.appendChild(claimButton);
+    } else {
+        prizeDiv.innerHTML =
+            "<p>Complete both stations to win a LUCKY DRAW TICKET (an extra one if you're a runner!) — be sure to verify this at the redemption/info counter!</p>";
+    }
 }
 
 // How many QR codes they need to scan to claim the prize
