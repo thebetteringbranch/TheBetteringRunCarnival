@@ -4,22 +4,18 @@ if (sessionStorage.getItem("pointsRedeemed") === "true") {
 }
 
 // How many QR codes they need to scan to claim the prize
-const TOTAL_CODES = 5;
+const TOTAL_CODES = 2;
 
 let codes = [
     "c6d9bdfc493eb3948e5ac2e51c3c65f6db3c26a0d702d42e255b6a79fe4ed07d", // Hash of 'one'
     "6e7552e8fe51972c90ef7c6f2d423249836937a1be4980f7359f8d5c8d735a7a", // Hash of 'two'
-    "825c14326484a1e1eb1eeb5911ed8329e69db45b22d885c6b19c1f169a7bb348", // Hash of 'three'
-    "f6932b1c88c815ac503ecb6bbd31f95fdbf4fe3f307039c45a3b5943f5d153f9", // Hash of 'four'
-    "7d71d1c45b89a253c6eb23b67855e912a402b56d59c5b7cda8b98ed1e1f6a540", // Hash of 'five'
+  
 ];
 
 let station_names = [
-    "Sustainability Meets Fashion",
-    "Cap & Create",
-    "HealthIQ",
-    "Bin It Right!",
-    "Stress Less, Waste Less",
+    "What does it cost the Earth?",
+    "How good is it for me>",
+   
 ];
 
 // Function to get progress from localStorage
@@ -67,7 +63,7 @@ function updateProgressDisplay(codes) {
         prizeDiv.appendChild(claimButton);
     } else {
         prizeDiv.innerHTML =
-            "<p>Complete all 5 stations to win a LUCKY DRAW TICKET or special prize — redeemable at the redemption counter!</p>";
+            "<p>Complete both stations to win a LUCKY DRAW TICKET (an extra one if you're a runner!) — be sure to verify this at the redempetion/info counter!</p>";
     }
 }
 
@@ -120,7 +116,7 @@ const foodVoucher = urlParams.get("foodVoucher");
 
 if (foodVoucher == "false") {
     alert(
-        "Unfortunately, Food Voucher Redemption is only available for Verified Users"
+        "Unfortunately, This Voucher is only available for Registered Runners"
     );
 }
 
@@ -128,7 +124,7 @@ const photoBooth = urlParams.get("photoBooth");
 
 if (photoBooth == "false") {
     alert(
-        "Unfortunately, Photo Booth Voucher Redemption is only available for Verified Users"
+        "Unfortunately, This Voucher is only available for Registered Runners"
     );
 }
 
