@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
         button.disabled = true;
         button.classList.add("disabled");
         document.getElementById("bottomDisclaimer").textContent =
-            "Enjoy your treat! You have successfully redeemed your food voucher from The Bettering Run 2025.";
+            "Enjoy your treat! You have successfully redeemed your voucher from The Bettering Run 2026.";
         document.getElementById("bottomDisclaimer").style.height = "auto";
     }
 
