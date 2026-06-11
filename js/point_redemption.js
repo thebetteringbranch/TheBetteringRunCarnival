@@ -1,4 +1,1 @@
-history.replaceState(null, "", window.location.href);
-window.onpopstate = () => {
-    history.go(1);
-};
+window.location.href = "stampcard.html";
